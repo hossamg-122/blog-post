@@ -1,5 +1,6 @@
 const initState = {
   posts: [],
+  mode:'light'
 };
 
 /**
