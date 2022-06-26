@@ -1,6 +1,5 @@
 import { Box, Paper, IconButton, Avatar, Button } from "@mui/material";
 import React from "react";
-import { postBox, postAvatar, postButton } from "./Post.style";
 import { useTheme } from "@mui/material/styles";
 import { PostForm } from "../";
 import { Profile } from "../";
