@@ -1,31 +1,33 @@
-import React from 'react';
-import { useSelector } from 'react-redux'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from "react";
+import { useSelector } from "react-redux";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "./App.css";
 import { Home } from "./pages";
-import { Navbar } from './components';
-import { Footer } from './components';
+import { Navbar } from "./components";
+import { Footer } from "./components";
+import Container from "@mui/material/Container";
 
 function App() {
-  const {mode} =useSelector((state)=>state.blog)
+  const { mode } = useSelector((state) => state.blog);
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode
+          mode,
         },
       }),
-    [mode],
+    [mode]
   );
   return (
     <div>
       <ThemeProvider theme={theme}>
         <Navbar />
-      <Home />
-      <Footer />
+        <Container maxWidth="lg">
+          <Home />
+        </Container>
+
+        <Footer />
       </ThemeProvider>
-     
-      
     </div>
   );
 }
