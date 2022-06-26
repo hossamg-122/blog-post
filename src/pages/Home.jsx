@@ -1,22 +1,25 @@
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+import { Post, PostCard, SkeletonLoader } from "../components";
 import { fetchPosts } from "../store/actions";
+
 export const Home = () => {
+  const [loading, setLoading] = useState(true);
   const dispatcher = useDispatch();
+  const { posts } = useSelector((state) => state.blog);
   useEffect(() => {
-    dispatcher(fetchPosts());
+    dispatcher(fetchPosts(setLoading));
   }, []);
-  return <Box sx={{
-    display: 'flex',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    bgcolor:'red',
-    color: 'text.primary',
-    borderRadius: 1,
-    fontSize:'7rem',
-    fontFamily:'Montserrat',
-   
-  }}>P platform</Box>;
+  return (
+    <Box component="main" sx={{}}>
+      <Post />
+      {loading ? (
+        <SkeletonLoader />
+      ) : (
+        posts?.map((post) => <PostCard key={post.id} post={post} />)
+      )}
+    </Box>
+  );
 };
