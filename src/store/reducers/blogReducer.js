@@ -1,6 +1,7 @@
 const initState = {
   posts: [],
-  mode:'light'
+  mode: "light",
+  dialogFormParams: { open: false, title: "", action: "",buttonText:"",initialValues:{body:""} },
 };
 
 /**
