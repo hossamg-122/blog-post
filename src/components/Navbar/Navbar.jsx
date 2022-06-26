@@ -41,8 +41,8 @@ export const Navbar = () => {
             <img
               src={
                 theme.palette.mode === "dark"
-                  ? require("../assets/logo-dark.png")
-                  : require("../assets/logo-light.png")
+                  ? require("../../assets/logo-dark.png")
+                  : require("../../assets/logo-light.png")
               }
               alt="Atomica"
               loading="lazy"
@@ -65,7 +65,7 @@ export const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Hossam Gamal" src={require('../../assets/profile.png')} sizes='small'  />
               </IconButton>
             </Tooltip>
             <Menu
