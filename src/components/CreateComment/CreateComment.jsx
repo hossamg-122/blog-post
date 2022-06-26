@@ -32,7 +32,7 @@ export const CreateComment = () => {
             multiline
             InputProps={{
               endAdornment: (
-                <Button type="submit" variant="contained" size="small" sx={{textTransform:'capitalize'}} >
+                <Button type="submit" variant="contained" size="small" sx={{textTransform:'capitalize',px:2}} >
                   Comment
                 </Button>
               ),
