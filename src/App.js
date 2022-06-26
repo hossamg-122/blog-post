@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import "./App.css";
 import { Home } from "./pages";
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components';
+import { Footer } from './components';
 
 function App() {
   const {mode} =useSelector((state)=>state.blog)
@@ -21,6 +22,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Navbar />
       <Home />
+      <Footer />
       </ThemeProvider>
      
       
