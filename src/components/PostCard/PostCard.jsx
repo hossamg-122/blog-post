@@ -7,12 +7,12 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Typography, Tooltip } from "@mui/material";
 import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CommentIcon from "@mui/icons-material/Comment";
-import { CreateComment, CommentList } from "../";
+import { CreateComment, CommentList, Profile, MoreIcon } from "../";
 import { useDispatch } from "react-redux";
 import { fetchComments } from "../../store/actions";
 const ExpandMore = styled((props) => {
@@ -35,21 +35,23 @@ export const PostCard = ({ post }) => {
       setExpanded(!expanded);
       return;
     }
- dispatcher(fetchComments(post.id, setLoadComments, setExpanded));
+    dispatcher(fetchComments(post.id, setLoadComments, setExpanded));
   };
 
   return (
     <Card sx={{ m: 2 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-          {post?.user?.name[0]}
-          </Avatar>
+          post.user.name === "Hossam Gamal" ? (
+            <Profile />
+          ) : (
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              {post?.user?.name[0]}
+            </Avatar>
+          )
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <MoreIcon title="Post Actions" action="EDIT_POST" element={post} />
         }
         title={post?.user?.name}
         subheader={post?.user?.email}
