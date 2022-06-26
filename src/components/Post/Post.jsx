@@ -3,7 +3,7 @@ import React from "react";
 import { postBox, postAvatar, postButton } from "./Post.style";
 import { useTheme } from "@mui/material/styles";
 import { PostForm } from "../";
-
+import { Profile } from "../";
 export const Post = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -17,11 +17,7 @@ export const Post = () => {
     <>
       <Box component={Paper} sx={{ m: 2, p: 3, display: "flex" }}>
         <IconButton sx={{ p: 0, mr: 1 }}>
-          <Avatar
-            alt="Hossam Gamal"
-            src={require("../../assets/profile.png")}
-            sizes="small"
-          />
+         <Profile />
         </IconButton>
         <Button
           variant="text"
