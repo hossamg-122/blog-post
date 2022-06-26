@@ -1,5 +1,6 @@
 import { jsonplaceholder } from "../../api's/jsonPlaceHolder";
 import _ from "lodash";
+import { toast } from "react-toastify";
 
 const _fetchUsers = _.memoize(async (userId) => {
   try {
@@ -26,6 +27,7 @@ export const fetchPosts = (setLoading) => {
             });
         })
       );
+      toast.success("posts are fetched successfully");
 
       dispatch({
         type: "posts",
@@ -33,7 +35,7 @@ export const fetchPosts = (setLoading) => {
       });
       setLoading(false);
     } catch (error) {
-      console.log("error", error.response);
+      toast.error("something went wrong, please refresh the page");
     }
   };
 };
@@ -45,6 +47,7 @@ export const fetchComments = (postId, setLoadComments, setExpanded) => {
       const modifiedPosts = getState().blog.posts.map((post) => {
         return post.id === postId ? { ...post, comments: data } : post;
       });
+      toast.success("comments are fetched successfully");
       dispatch({
         type: "posts",
         payload: modifiedPosts,
@@ -53,7 +56,7 @@ export const fetchComments = (postId, setLoadComments, setExpanded) => {
       setLoadComments(false);
       setExpanded(true);
     } catch (error) {
-      console.log("error", error.response);
+      toast.error("something went wrong, please refresh the page");
     }
   };
 };
