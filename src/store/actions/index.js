@@ -9,9 +9,13 @@ const _fetchUsers = _.memoize(async (userId) => {
     console.log(error, error.response);
   }
 });
+
+// fetch users action
 export const fetchUser = async (userId) => {
   return _fetchUsers(userId);
 };
+
+//fetch posts action
 export const fetchPosts = (setLoading) => {
   return async (dispatch) => {
     try {
@@ -39,6 +43,7 @@ export const fetchPosts = (setLoading) => {
     }
   };
 };
+//fetch comments action
 export const fetchComments = (postId, setLoadComments, setExpanded) => {
   return async (dispatch, getState) => {
     setLoadComments(true);
@@ -60,3 +65,55 @@ export const fetchComments = (postId, setLoadComments, setExpanded) => {
     }
   };
 };
+
+// create post action
+export const createPost = ({ body }, handleClose) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await jsonplaceholder.post(`/posts`, {
+        title: "test add post",
+        body: body,
+        userId: 1,
+      });
+      dispatch({
+        type: "posts",
+        payload: [
+          {
+            ...data,
+            user: { name: "Hossam Gamal", email: "hossamg122@atomica.ai" },
+          },
+          ...getState().blog.posts,
+        ],
+      });
+      toast.success("your post has been created successfully");
+      handleClose();
+      console.log("Post Created", data);
+    } catch (error) {
+      toast.error("something went wrong, please refresh the page");
+    }
+  };
+};
+
+// update post action
+export const updatePost = (postId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
+      console.log("data", data);
+    } catch (error) {
+      toast.error("something went wrong, please refresh the page");
+    }
+  };
+};
+export const deletePost = (postId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
+      console.log("data", data);
+    } catch (error) {
+      toast.error("something went wrong, please refresh the page");
+    }
+  };
+};
+
+
