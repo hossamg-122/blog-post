@@ -4,7 +4,7 @@ import { footerText } from "./Footer.style";
 
 export const Footer = () => {
   return (
-    <Box component="footer" sx={{ textAlign: "center" }}>
+    <Box component="footer" sx={{ textAlign: "center",mt:'auto',py:8 }}>
       <Typography
         component="a"
         variant="body2"
