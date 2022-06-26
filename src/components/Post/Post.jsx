@@ -1,22 +1,31 @@
-import { Box, Paper, IconButton, Avatar, Button } from "@mui/material";
+import { Box, Paper, IconButton, Button } from "@mui/material";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
-import { PostForm } from "../";
+import { DialogForm } from "../";
 import { Profile } from "../";
+import { useDispatch } from "react-redux";
+import { CREATE_POST } from "../../store/actions/types";
 export const Post = () => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const dispatcher = useDispatch();
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatcher({
+      type: "dialogFormParams",
+      payload: {
+        open: true,
+        action: CREATE_POST,
+        title: "Create Post",
+        buttonText: "Post",
+        initialValues: { body: "" },
+      },
+    });
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   return (
     <>
       <Box component={Paper} sx={{ m: 2, p: 3, display: "flex" }}>
         <IconButton sx={{ p: 0, mr: 1 }}>
-         <Profile />
+          <Profile />
         </IconButton>
         <Button
           variant="text"
@@ -35,12 +44,7 @@ export const Post = () => {
           Start a post
         </Button>
       </Box>
-      <PostForm
-        title="Create a post"
-        buttonText='Post'
-        open={open}
-        handleClose={handleClose}
-      />
+      <DialogForm />
     </>
   );
 };
