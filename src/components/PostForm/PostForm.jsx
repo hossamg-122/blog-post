@@ -53,12 +53,22 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const PostForm = ({ title, open, handleClose, buttonText,initialValues }) => {
-    const initialValues ={body:initialValues?.body?initialValues.body:""} 
-    const validate = Yup.object({
-        body: Yup.string().required("required"),
-        affect: Yup.string().required("required"),
-      });
+export const PostForm = ({
+  title,
+  open,
+  handleClose,
+  buttonText,
+  editableValues,
+}) => {
+  const initialValues = {
+    body: editableValues?.body ? editableValues.body : "",
+  };
+  const validate = Yup.object({
+    body: Yup.string().required("required"),
+  });
+  const handleSubmit = (values) => {
+    console.log("values", values);
+  };
   return (
     <div>
       <BootstrapDialog
@@ -73,28 +83,35 @@ export const PostForm = ({ title, open, handleClose, buttonText,initialValues })
         >
           {title}
         </BootstrapDialogTitle>
-
-        <DialogContent dividers>
-          <Formik>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validate}
+            onSubmit={(values) => handleSubmit(values)}
+          >
+            
             {(formValues) => (
               <Form>
+        <DialogContent dividers>
+          
                 <InputHandler
                   placeholder="Please enter text"
+                  name="body"
                   fullWidth
                   multiline
                   rows={3}
                   variant="outlined"
                   autoFocus={false}
                 />
-              </Form>
-            )}
-          </Formik>
+             
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button type="submit" autoFocus >
             {buttonText}
           </Button>
         </DialogActions>
+         </Form>
+         )}
+       </Formik>
       </BootstrapDialog>
     </div>
   );
