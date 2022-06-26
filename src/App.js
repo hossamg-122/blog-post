@@ -22,11 +22,12 @@ function App() {
     <div>
       <ThemeProvider theme={theme}>
         <Navbar />
-        <Container maxWidth="lg">
+        <Container maxWidth="sm" component='main' sx={{display:'flex',flexDirection:'column',height:'90vh'}}>
           <Home />
+          <Footer />
         </Container>
 
-        <Footer />
+        
       </ThemeProvider>
     </div>
   );
