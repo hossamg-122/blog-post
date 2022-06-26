@@ -3,8 +3,12 @@ import { jsonplaceholder } from "../../api's/jsonPlaceHolder";
 export const fetchPosts = () => {
   return async (dispatch) => {
     try {
-      const response = await jsonplaceholder.get("/posts");
-      console.log("response", response);
+      const {data} = await jsonplaceholder.get("/posts");
+      dispatch({
+        type:'posts',
+        payload:data
+      })
+     
     } catch (error) {
       console.log("error", error.response);
     }
