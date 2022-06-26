@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useTheme } from "@mui/material/styles";
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Logout"];
 
 export const Navbar = () => {
   const theme = useTheme();
@@ -65,7 +65,11 @@ export const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Hossam Gamal" src={require('../../assets/profile.png')} sizes='small'  />
+                <Avatar
+                  alt="Hossam Gamal"
+                  src={require("../../assets/profile.png")}
+                  sizes="small"
+                />
               </IconButton>
             </Tooltip>
             <Menu
