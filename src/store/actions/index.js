@@ -148,7 +148,6 @@ export const createPost = ({ body }, handleClose) => {
       });
       toast.success("your post has been created successfully");
       handleClose();
-      console.log("Post Created", data);
     } catch (error) {
       toast.error("something went wrong, please refresh the page");
     }
@@ -165,7 +164,7 @@ export const updatePost = (values, handleClose) => {
       });
       let record = getState().blog.posts.find((post) => post.id === data.id);
       record.body = data.body;
-      console.log("record", record);
+
       toast.success("your post has been updated successfully");
       handleClose();
     } catch (error) {
