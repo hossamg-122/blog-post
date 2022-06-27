@@ -34,6 +34,7 @@ export const MoreIcon = ({ title, action, element, deleteAction }) => {
             initialValues: { ...element },
           },
         });
+        break;
       case EDIT_COMMENT:
         dispatcher({
           type: "dialogFormParams",
@@ -45,12 +46,13 @@ export const MoreIcon = ({ title, action, element, deleteAction }) => {
             initialValues: { ...element },
           },
         });
+        break;
       default:
         break;
     }
   };
   const handleDeleteClick = () => {
-    dispatcher(deleteAction(element));
+    dispatcher(deleteAction(element.id));
   };
   return (
     <React.Fragment>
