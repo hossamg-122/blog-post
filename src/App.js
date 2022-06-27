@@ -7,9 +7,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Router } from "./router/Router";
 import { validateUser } from "./store/actions";
+import { Box } from "@mui/material";
 function App() {
   const { mode } = useSelector((state) => state.blog);
-  const dispatcher = useDispatch()
+  const dispatcher = useDispatch();
   useEffect(() => {
     dispatcher(validateUser());
   }, []);
@@ -23,13 +24,13 @@ function App() {
     [mode]
   );
   return (
-    <div>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Box bgcolor='background.default' >
         <ToastContainer />
         <Navbar />
         <Router />
-      </ThemeProvider>
-    </div>
+      </Box>
+    </ThemeProvider>
   );
 }
 
