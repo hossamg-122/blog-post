@@ -68,6 +68,7 @@ export const fetchComments = (postId, setLoadComments, setExpanded) => {
 
 // create post action
 export const createPost = ({ body }, handleClose) => {
+  console.log("body", body);
   return async (dispatch, getState) => {
     try {
       const { data } = await jsonplaceholder.post(`/posts`, {
@@ -95,11 +96,18 @@ export const createPost = ({ body }, handleClose) => {
 };
 
 // update post action
-export const updatePost = (postId) => {
+export const updatePost = (values, handleClose) => {
+  console.log("test");
   return async (dispatch, getState) => {
     try {
-      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
-      console.log("data", data);
+      const { data } = await jsonplaceholder.put(`/posts/${values.id}`, {
+        ...values,
+      });
+      let record = getState().blog.posts.find((post) => post.id === data.id);
+      record.body = data.body;
+      console.log("record", record);
+      toast.success("your post has been updated successfully");
+      handleClose();
     } catch (error) {
       toast.error("something went wrong, please refresh the page");
     }
@@ -108,6 +116,25 @@ export const updatePost = (postId) => {
 export const deletePost = (postId) => {
   return async (dispatch, getState) => {
     try {
+      await jsonplaceholder.delete(`/posts/${postId}`);
+      const modifiedPosts = getState().blog.posts.filter((post) => {
+        return post.id !== postId;
+      });
+      dispatch({
+        type: "posts",
+        payload: modifiedPosts,
+      });
+
+      toast.success("your post has been deleted successfully");
+    } catch (error) {
+      toast.error("something went wrong, please refresh the page");
+    }
+  };
+};
+
+export const createComment = (postId) => {
+  return async (dispatch, getState) => {
+    try {
       const { data } = await jsonplaceholder.put(`/posts/${postId}`);
       console.log("data", data);
     } catch (error) {
@@ -115,5 +142,23 @@ export const deletePost = (postId) => {
     }
   };
 };
-
-
+export const updateComment = (postId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
+      console.log("data", data);
+    } catch (error) {
+      toast.error("something went wrong, please refresh the page");
+    }
+  };
+};
+export const deleteComment = (postId) => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
+      console.log("data", data);
+    } catch (error) {
+      toast.error("something went wrong, please refresh the page");
+    }
+  };
+};
