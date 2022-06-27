@@ -1,7 +1,15 @@
 const initState = {
+  isLogin: false,
+  user: { name: "", email: "" },
   posts: [],
   mode: "light",
-  dialogFormParams: { open: false, title: "", action: "",buttonText:"",initialValues:{body:""} },
+  dialogFormParams: {
+    open: false,
+    title: "",
+    action: "",
+    buttonText: "",
+    initialValues: { body: "" },
+  },
 };
 
 /**
