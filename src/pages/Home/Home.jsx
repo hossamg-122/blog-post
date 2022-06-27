@@ -7,8 +7,8 @@ import {
   SkeletonLoader,
   Footer,
   ScrollUpButton,
-} from "../components";
-import { fetchPosts } from "../store/actions";
+} from "../../components";
+import { fetchPosts } from "../../store/actions";
 export const Home = () => {
   const [loading, setLoading] = useState(true);
   const dispatcher = useDispatch();
@@ -20,9 +20,10 @@ export const Home = () => {
     <>
       <Container
         maxWidth="sm"
-        sx={{ display: "flex", flexDirection: "column",mt:10 }}
+        sx={{ display: "flex", flexDirection: "column", mt: 10 }}
       >
         <Box component="main">
+          {/* this is create post card */}
           <Post />
           {loading ? (
             <SkeletonLoader />

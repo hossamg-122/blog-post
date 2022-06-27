@@ -1,16 +1,20 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import Edit from "@mui/icons-material/Edit";
-import Delete from "@mui/icons-material/Delete";
+import {
+  Box,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Divider,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
+
+import { Edit, Delete } from "@mui/icons-material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useDispatch } from "react-redux";
 import { EDIT_COMMENT, EDIT_POST } from "../../store/actions/types";
+
+// this a generic component for more icon in both post and component card
 export const MoreIcon = ({ title, action, element, deleteAction }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -21,6 +25,7 @@ export const MoreIcon = ({ title, action, element, deleteAction }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  // this function handling displaying DialogForm component when user clicks edit button regarding the action in the props
   const handleEditClick = () => {
     switch (action) {
       case EDIT_POST:
@@ -51,6 +56,7 @@ export const MoreIcon = ({ title, action, element, deleteAction }) => {
         break;
     }
   };
+  // this function handling deleting element in the props
   const handleDeleteClick = () => {
     dispatcher(deleteAction(element));
   };

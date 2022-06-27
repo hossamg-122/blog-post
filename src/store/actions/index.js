@@ -63,11 +63,12 @@ export const logOut = () => {
     toast.success("You have signed out successfully");
   };
 };
+// this function to avoid refetching posts from API multiple times as jsonHolder sends each post 10 times
 const _fetchUsers = _.memoize(async (userId) => {
   try {
     return await jsonplaceholder.get(`./users/${userId}`);
   } catch (error) {
-    console.log(error, error.response);
+    toast.error("something went wrong, please refresh the page");
   }
 });
 
@@ -81,6 +82,7 @@ export const fetchPosts = (setLoading) => {
   return async (dispatch) => {
     try {
       const { data } = await jsonplaceholder.get("/posts");
+      // fetching user for each post and put it with the post
       const postsWithUsers = await Promise.all(
         data.map(async (post) => {
           return await fetchUser(post.userId)
@@ -88,7 +90,7 @@ export const fetchPosts = (setLoading) => {
               return { ...post, user: { ...data } };
             })
             .catch((error) => {
-              console.log(error, error.response);
+              toast.error("something went wrong, please refresh the page");
             });
         })
       );
@@ -105,6 +107,7 @@ export const fetchPosts = (setLoading) => {
   };
 };
 //fetch comments action
+// this action works only when user clicks on comments button to fetch comments for the post when only the user want to avoid fetching unnecessary data and consume requests
 export const fetchComments = (postId, setLoadComments, setExpanded) => {
   return async (dispatch, getState) => {
     setLoadComments(true);

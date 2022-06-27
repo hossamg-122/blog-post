@@ -1,18 +1,10 @@
 import * as React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { IconButton } from "@mui/material";
-import "./comment.css";
-import { Profile } from "../Profile/Profile";
+import {List,ListItem,Divider,ListItemText,ListItemAvatar,Avatar} from "@mui/material";
+import { Profile,MoreIcon } from "../";
 import { EDIT_COMMENT } from "../../store/actions/types";
 import { deleteComment } from "../../store/actions";
-import { MoreIcon } from "../";
+import "./comment.css";
+
 export const CommentList = ({ comments = [] }) => {
   return (
     <List sx={{ width: "100%" }}>
@@ -20,6 +12,7 @@ export const CommentList = ({ comments = [] }) => {
         <div key={comment.id}>
           <ListItem
             secondaryAction={
+              // this a generic component for more icon in component card
               <MoreIcon
                 title="Post Actions"
                 action={EDIT_COMMENT}

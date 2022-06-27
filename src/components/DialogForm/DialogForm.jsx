@@ -1,12 +1,13 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
+import {
+  Button,
+  styled,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Form, Formik } from "formik";
 import { InputHandler } from "..";
@@ -51,13 +52,9 @@ const BootstrapDialogTitle = (props) => {
     </DialogTitle>
   );
 };
-
-BootstrapDialogTitle.propTypes = {
-  children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
-};
-
+// this a generic component for handling create and edit post or comment
 export const DialogForm = () => {
+  // this component is fully controlled from redux
   const { open, title, action, buttonText, initialValues } = useSelector(
     (state) => state.blog.dialogFormParams
   );
@@ -107,6 +104,7 @@ export const DialogForm = () => {
           {(formValues) => (
             <Form>
               <DialogContent dividers>
+                {/* this is a generic component for TextField Input  */}
                 <InputHandler
                   placeholder="Please enter text"
                   name="body"

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Card, CardHeader, Skeleton } from "@mui/material";
-
+// this loader is displayed till data is fetched
 export const SkeletonLoader = () => {
   return (
-    <Card  sx={{m:2 }}>
+    <Card sx={{ m: 2 }}>
       <CardHeader
         avatar={
           <Skeleton

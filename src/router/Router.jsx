@@ -7,12 +7,14 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* // those are public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         <Route
           path="/"
           element={
+            // this component check if user authenticated or not
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>

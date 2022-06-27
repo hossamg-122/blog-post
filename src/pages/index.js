@@ -1,3 +1,3 @@
-export * from "./Home"
-export * from "./Login"
-export * from "./Register"
+export * from "./Home/Home";
+export * from "./Login/Login";
+export * from "./Register/Register";

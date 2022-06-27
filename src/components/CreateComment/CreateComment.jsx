@@ -1,9 +1,8 @@
 import React from "react";
-import { Button, IconButton, Avatar } from "@mui/material";
-import { useDispatch } from "react-redux/es/exports";
+import { Button, IconButton } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { Form, Formik } from "formik";
-import { InputHandler } from "../";
-import { Profile } from "../";
+import { InputHandler, Profile } from "../";
 import * as Yup from "yup";
 import { createComment } from "../../store/actions";
 export const CreateComment = ({ post }) => {
@@ -35,6 +34,7 @@ export const CreateComment = ({ post }) => {
     >
       {(formValues) => (
         <Form>
+          {/* this is a generic component for TextField Input  */}
           <InputHandler
             placeholder="Add a comment..."
             name="body"
@@ -55,6 +55,7 @@ export const CreateComment = ({ post }) => {
               ),
               startAdornment: (
                 <IconButton sx={{ p: 0, mr: 2 }}>
+                  {/* this is a generic component for user profile */}
                   <Profile />
                 </IconButton>
               ),

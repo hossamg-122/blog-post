@@ -1,3 +1,4 @@
+// this a global reducer holds all the states for the app
 const initState = {
   isLogin: false,
   user: { name: "", email: "" },

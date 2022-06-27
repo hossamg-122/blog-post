@@ -1,42 +1,30 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { Link } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+} from "@mui/material";
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import { Formik, Form } from "formik";
 import { InputHandler } from "../../components";
 import * as Yup from "yup";
 import { login } from "../../store/actions";
 import { useDispatch } from "react-redux";
-import {useNavigate} from 'react-router-dom'
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link href="/">Atomica, All rights reserved</Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const dispatcher = useDispatch();
-  const router = useNavigate()
+  const router = useNavigate();
   const handleSubmit = (values) => {
-    dispatcher(login(values,router));
+    dispatcher(login(values, router));
   };
   const initialValues = {
     email: "",
@@ -45,10 +33,14 @@ export const Login = () => {
   };
   const validate = Yup.object({
     email: Yup.string().email().required("required"),
-    password: Yup.number().required("required"),
+    password: Yup.string().required("required"),
   });
   return (
-    <Grid container component="main" sx={{ height: "calc(100vh - 64px)" ,mt:7}}>
+    <Grid
+      container
+      component="main"
+      sx={{ height: "calc(100vh - 64px)", mt: 7 }}
+    >
       <CssBaseline />
       <Grid
         item
@@ -142,18 +134,18 @@ export const Login = () => {
               </Grid>
             </Grid>
             <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-    sx={{mt:5}}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        Atomica, All rights reserved
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+              variant="body2"
+              color="text.secondary"
+              align="center"
+              sx={{ mt: 5 }}
+            >
+              {"Copyright © "}
+              <Link color="inherit" href="/">
+                Atomica, All rights reserved
+              </Link>{" "}
+              {new Date().getFullYear()}
+              {"."}
+            </Typography>
           </Box>
         </Box>
       </Grid>
