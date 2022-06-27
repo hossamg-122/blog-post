@@ -12,6 +12,12 @@ import { Form, Formik } from "formik";
 import { InputHandler } from "..";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  CREATE_POST,
+  EDIT_COMMENT,
+  EDIT_POST,
+} from "../../store/actions/types";
+import { createPost, updateComment, updatePost } from "../../store/actions";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -52,18 +58,32 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export const DialogForm = () => {
-  const{ open, title, action,buttonText,initialValues } = useSelector((state)=>state.blog.dialogFormParams)
- 
+  const { open, title, action, buttonText, initialValues } = useSelector(
+    (state) => state.blog.dialogFormParams
+  );
+
   const handleClose = () => {
-    dispatcher({type:'dialogFormParams',payload:{open:false}})
+    dispatcher({ type: "dialogFormParams", payload: { open: false } });
   };
-  
+
   const validate = Yup.object({
     body: Yup.string().required("required"),
   });
   const dispatcher = useDispatch();
   const handleSubmit = (values) => {
-    dispatcher(action(values, handleClose));
+    switch (action) {
+      case CREATE_POST:
+        dispatcher(createPost(values, handleClose));
+        break;
+      case EDIT_POST:
+        dispatcher(updatePost(values, handleClose));
+        break;
+      case EDIT_COMMENT:
+        dispatcher(updateComment(values, handleClose));
+        break;
+      default:
+        break;
+    }
   };
   return (
     <div>
