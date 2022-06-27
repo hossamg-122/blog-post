@@ -5,7 +5,8 @@ export * from "./DialogForm/DialogForm";
 export * from "./InputHandler/InputHandler";
 export * from "./PostCard/PostCard";
 export * from "./CreateComment/CreateComment";
-export * from "./Profile/Profile"
-export * from "./SkeletonLoader/SkeletonLoader"
-export * from "./CommentList/CommentList"
-export * from "./MoreIcon/MoreIcon"
+export * from "./Profile/Profile";
+export * from "./SkeletonLoader/SkeletonLoader";
+export * from "./CommentList/CommentList";
+export * from "./MoreIcon/MoreIcon";
+export * from "./ProtectedRoute/ProtectedRoute";
