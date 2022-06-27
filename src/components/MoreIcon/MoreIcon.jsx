@@ -52,7 +52,7 @@ export const MoreIcon = ({ title, action, element, deleteAction }) => {
     }
   };
   const handleDeleteClick = () => {
-    dispatcher(deleteAction(element.id));
+    dispatcher(deleteAction(element));
   };
   return (
     <React.Fragment>

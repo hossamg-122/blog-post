@@ -77,7 +77,7 @@ export const PostCard = ({ post }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <CreateComment />
+          <CreateComment post={post}/>
           <CommentList comments={post.comments} />
         </CardContent>
       </Collapse>

@@ -1,11 +1,13 @@
 import React from "react";
 import { Button, IconButton, Avatar } from "@mui/material";
-
+import { useDispatch } from "react-redux/es/exports";
 import { Form, Formik } from "formik";
 import { InputHandler } from "../";
 import { Profile } from "../";
 import * as Yup from "yup";
-export const CreateComment = () => {
+import { createComment } from "../../store/actions";
+export const CreateComment = ({ post }) => {
+  const dispatcher = useDispatch();
   const initialValues = {
     body: "",
   };
@@ -13,13 +15,23 @@ export const CreateComment = () => {
     body: Yup.string().required("required"),
   });
   const handleSubmit = (values) => {
-    console.log("values", values);
+    const { id } = post;
+    const requiredData = {
+      ...values,
+      postId: id,
+      name: "Hossam Gamal",
+      email: "hossamg@atomica.ai",
+    };
+    dispatcher(createComment(requiredData));
   };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validate}
-      onSubmit={(values) => handleSubmit(values)}
+      onSubmit={(values, { resetForm }) => {
+        handleSubmit(values);
+        resetForm();
+      }}
     >
       {(formValues) => (
         <Form>
@@ -32,7 +44,12 @@ export const CreateComment = () => {
             multiline
             InputProps={{
               endAdornment: (
-                <Button type="submit" variant="contained" size="small" sx={{textTransform:'capitalize',px:2}} >
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="small"
+                  sx={{ textTransform: "capitalize", px: 2 }}
+                >
                   Comment
                 </Button>
               ),
