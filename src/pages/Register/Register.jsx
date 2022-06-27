@@ -12,23 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Atomica, All rights reserved
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export const Register = () => {
   const handleSubmit = (event) => {
@@ -118,14 +101,26 @@ export const Register = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
+      <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+    sx={{mt:5}}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="/">
+        Atomica, All rights reserved
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
     </Container>
   );
 };

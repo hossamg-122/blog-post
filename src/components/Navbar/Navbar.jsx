@@ -41,27 +41,13 @@ export const Navbar = () => {
     handleCloseUserMenu();
     dispatcher(logOut());
   };
-  function ElevationScroll({children}) {
-    
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-      disableHysteresis: true,
-      threshold: 0,
-     
-    });
-
-    return React.cloneElement(children, {
-      elevation: trigger ? 4 : 0,
-    });
-  }
+  
 
   return (
     <>
       <CssBaseline />
-      <ElevationScroll>
-        <AppBar enableColorOnDark color="default">
+     
+        <AppBar enableColorOnDark color="default" >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Box sx={{ display: "flex", flexGrow: 1 }}>
@@ -77,9 +63,7 @@ export const Navbar = () => {
                 />
               </Box>
 
-              <Box
-                sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
-              ></Box>
+              
               <IconButton
                 sx={{ mr: 2 }}
                 onClick={handleThemeChange}
@@ -92,14 +76,17 @@ export const Navbar = () => {
                 )}
               </IconButton>
               {isLogin ? (
-                <Box sx={{ flexGrow: 0 }}>
+                <Box sx={{ flexGrow: 0}}>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Profile />
                     </IconButton>
                   </Tooltip>
                   <Menu
-                    sx={{ mt: "45px" }}
+                    sx={{
+                      mt: "45px",
+                     
+                    }}
                     id="menu-appbar"
                     anchorEl={anchorElUser}
                     anchorOrigin={{
@@ -125,7 +112,7 @@ export const Navbar = () => {
             </Toolbar>
           </Container>
         </AppBar>
-      </ElevationScroll>
+     
     </>
   );
 };

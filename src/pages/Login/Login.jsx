@@ -48,7 +48,7 @@ export const Login = () => {
     password: Yup.number().required("required"),
   });
   return (
-    <Grid container component="main" sx={{ height: "calc(100vh - 64px)" }}>
+    <Grid container component="main" sx={{ height: "calc(100vh - 64px)" ,mt:7}}>
       <CssBaseline />
       <Grid
         item
@@ -67,7 +67,7 @@ export const Login = () => {
           backgroundPosition: "left",
         }}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
         <Box
           sx={{
             my: 8,
@@ -141,7 +141,19 @@ export const Login = () => {
                 </Link>
               </Grid>
             </Grid>
-            <Copyright sx={{ mt: 5 }} />
+            <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+    sx={{mt:5}}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="/">
+        Atomica, All rights reserved
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
           </Box>
         </Box>
       </Grid>
