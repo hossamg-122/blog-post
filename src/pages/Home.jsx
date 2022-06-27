@@ -13,10 +13,10 @@ export const Home = () => {
   return (
     <Container
       maxWidth="sm"
-      component="main"
-      sx={{ display: "flex", flexDirection: "column", height: "90vh" }}
+     
+      sx={{ display: "flex", flexDirection: "column" }}
     >
-      <Box component="main" sx={{}}>
+      <Box component="main">
         <Post />
         {loading ? (
           <SkeletonLoader />
