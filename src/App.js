@@ -1,15 +1,18 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import "./App.css";
-import { Home } from "./pages";
 import { Navbar } from "./components";
-import { Footer } from "./components";
-import Container from "@mui/material/Container";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Router } from "./router/Router";
+import { validateUser } from "./store/actions";
 function App() {
   const { mode } = useSelector((state) => state.blog);
+  const dispatcher = useDispatch()
+  useEffect(() => {
+    dispatcher(validateUser());
+  }, []);
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -22,14 +25,9 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-      <ToastContainer />
+        <ToastContainer />
         <Navbar />
-        <Container maxWidth="sm" component='main' sx={{display:'flex',flexDirection:'column',height:'90vh'}}>
-          <Home />
-          <Footer />
-        </Container>
-
-        
+        <Router />
       </ThemeProvider>
     </div>
   );
