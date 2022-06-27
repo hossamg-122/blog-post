@@ -14,7 +14,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import CommentIcon from "@mui/icons-material/Comment";
 import { CreateComment, CommentList, Profile, MoreIcon } from "../";
 import { useDispatch } from "react-redux";
-import { fetchComments } from "../../store/actions";
+import { fetchComments,deletePost } from "../../store/actions";
+import { EDIT_POST } from "../../store/actions/types";
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -51,7 +52,7 @@ export const PostCard = ({ post }) => {
           )
         }
         action={
-          <MoreIcon title="Post Actions" action="EDIT_POST" element={post} />
+          <MoreIcon title="Post Actions" action={EDIT_POST} element={post} deleteAction={deletePost}/>
         }
         title={post?.user?.name}
         subheader={post?.user?.email}
