@@ -10,3 +10,4 @@ export * from "./SkeletonLoader/SkeletonLoader";
 export * from "./CommentList/CommentList";
 export * from "./MoreIcon/MoreIcon";
 export * from "./ProtectedRoute/ProtectedRoute";
+export * from "./ScrollUpButton/ScrollUpButton";

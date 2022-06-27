@@ -10,13 +10,14 @@ import Container from "@mui/material/Container";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Fade from "@mui/material/Fade";
+import { Tooltip } from "@mui/material";
 
 export const ScrollUpButton = () => {
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
   // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
+    
     disableHysteresis: true,
     threshold: 100,
   });
@@ -35,6 +36,7 @@ export const ScrollUpButton = () => {
 
   return (
     <Fade in={trigger}>
+        <Tooltip title='scroll back to top'>
       <Box
         onClick={handleClick}
         role="presentation"
@@ -44,6 +46,7 @@ export const ScrollUpButton = () => {
           <KeyboardArrowUpIcon />
         </Fab>
       </Box>
+      </Tooltip>
     </Fade>
   );
 };
