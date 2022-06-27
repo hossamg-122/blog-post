@@ -1,7 +1,6 @@
 import { jsonplaceholder } from "../../api's/jsonPlaceHolder";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { Router } from "@mui/icons-material";
 export const validateUser = () => {
   return (dispatch) => {
     const user = JSON.parse(localStorage.getItem("userData"));
@@ -28,7 +27,6 @@ export const validateUser = () => {
 };
 export const login = ({ email, password }, router) => {
   return (dispatch) => {
-    
     if (email === "hossamg@atomica.ai" && password === "123456") {
       dispatch({
         type: "user",
@@ -38,16 +36,33 @@ export const login = ({ email, password }, router) => {
         type: "isLogin",
         payload: true,
       });
-      localStorage.setItem("userData",JSON.stringify({ email: email, name: "Hossam Gamal" }))
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ email: email, name: "Hossam Gamal" })
+      );
       toast.success("You have signed in successfully");
-      
+
       router("/");
     } else {
       toast.error("Wrong email or password, please try again");
     }
   };
 };
+export const logOut = () => {
+  return (dispatch) => {
+    localStorage.removeItem("userData");
+    dispatch({
+      type: "user",
+      payload: { email: "", name: "" },
+    });
+    dispatch({
+      type: "isLogin",
+      payload: false,
+    });
 
+    toast.success("You have signed out successfully");
+  };
+};
 const _fetchUsers = _.memoize(async (userId) => {
   try {
     return await jsonplaceholder.get(`./users/${userId}`);
