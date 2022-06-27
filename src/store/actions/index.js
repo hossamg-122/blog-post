@@ -1,6 +1,52 @@
 import { jsonplaceholder } from "../../api's/jsonPlaceHolder";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import { Router } from "@mui/icons-material";
+export const validateUser = () => {
+  return (dispatch) => {
+    const user = JSON.parse(localStorage.getItem("userData"));
+    if (user) {
+      dispatch({
+        type: "user",
+        payload: user,
+      });
+      dispatch({
+        type: "isLogin",
+        payload: true,
+      });
+    } else {
+      dispatch({
+        type: "isLogin",
+        payload: false,
+      });
+      dispatch({
+        type: "user",
+        payload: { name: "", email: "" },
+      });
+    }
+  };
+};
+export const login = ({ email, password }, router) => {
+  return (dispatch) => {
+    
+    if (email === "hossamg@atomica.ai" && password === "123456") {
+      dispatch({
+        type: "user",
+        payload: { email: email, name: "Hossam Gamal" },
+      });
+      dispatch({
+        type: "isLogin",
+        payload: true,
+      });
+      localStorage.setItem("userData",JSON.stringify({ email: email, name: "Hossam Gamal" }))
+      toast.success("You have signed in successfully");
+      
+      router("/");
+    } else {
+      toast.error("Wrong email or password, please try again");
+    }
+  };
+};
 
 const _fetchUsers = _.memoize(async (userId) => {
   try {
@@ -68,7 +114,6 @@ export const fetchComments = (postId, setLoadComments, setExpanded) => {
 
 // create post action
 export const createPost = ({ body }, handleClose) => {
-  console.log("body", body);
   return async (dispatch, getState) => {
     try {
       const { data } = await jsonplaceholder.post(`/posts`, {
@@ -113,12 +158,12 @@ export const updatePost = (values, handleClose) => {
     }
   };
 };
-export const deletePost = (postId) => {
+export const deletePost = ({ id }) => {
   return async (dispatch, getState) => {
     try {
-      await jsonplaceholder.delete(`/posts/${postId}`);
+      await jsonplaceholder.delete(`/posts/${id}`);
       const modifiedPosts = getState().blog.posts.filter((post) => {
-        return post.id !== postId;
+        return post.id !== id;
       });
       dispatch({
         type: "posts",
@@ -132,31 +177,72 @@ export const deletePost = (postId) => {
   };
 };
 
-export const createComment = (postId) => {
+export const createComment = (values) => {
   return async (dispatch, getState) => {
     try {
-      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
-      console.log("data", data);
+      const { data } = await jsonplaceholder.post(`/comments`, {
+        ...values,
+      });
+      let modifiedPost = getState().blog.posts.map((post) => {
+        if (post.id === data.postId) {
+          post.comments = [...post.comments, data];
+        }
+        return post;
+      });
+      dispatch({
+        type: "posts",
+        payload: modifiedPost,
+      });
+
+      toast.success("your Comment has been created successfully");
     } catch (error) {
       toast.error("something went wrong, please refresh the page");
     }
   };
 };
-export const updateComment = (postId) => {
+export const updateComment = (values, handleClose) => {
   return async (dispatch, getState) => {
     try {
-      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
-      console.log("data", data);
+      const { data } = await jsonplaceholder.put(`/comments/${values.id}`, {
+        ...values,
+      });
+      const postIndex = getState().blog.posts.findIndex(
+        (post) => post.id === data.postId
+      );
+      const commentIndex = getState().blog.posts[postIndex].comments.findIndex(
+        (comment) => comment.id === data.id
+      );
+      console.log("postIndex", postIndex);
+      console.log("commentIndex", commentIndex);
+      dispatch({
+        reducer: "blog",
+        type: `posts.${postIndex}.comments.${commentIndex}`,
+        payload: data,
+      });
+
+      toast.success("your comment has been updated successfully");
+      handleClose();
     } catch (error) {
       toast.error("something went wrong, please refresh the page");
     }
   };
 };
-export const deleteComment = (postId) => {
+export const deleteComment = ({ postId, id }) => {
   return async (dispatch, getState) => {
     try {
-      const { data } = await jsonplaceholder.put(`/posts/${postId}`);
-      console.log("data", data);
+      await jsonplaceholder.delete(`/comments/${id}`);
+      const modifiedPosts = getState().blog.posts.map((post) => {
+        if (post.id === postId) {
+          post.comments = post.comments.filter((comment) => comment.id !== id);
+        }
+        return post;
+      });
+      dispatch({
+        type: "posts",
+        payload: modifiedPosts,
+      });
+
+      toast.success("your comment has been deleted successfully");
     } catch (error) {
       toast.error("something went wrong, please refresh the page");
     }
