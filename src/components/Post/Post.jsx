@@ -23,7 +23,7 @@ export const Post = () => {
 
   return (
     <>
-      <Box component={Paper} sx={{ m: 2, p: 3, display: "flex" }}>
+      <Box component={Paper} sx={{ m: 2, p: 3, display: "flex" }} id="back-to-top-anchor" elevation={2}>
         <IconButton sx={{ p: 0, mr: 1 }}>
           <Profile />
         </IconButton>
